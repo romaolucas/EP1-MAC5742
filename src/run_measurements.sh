@@ -36,6 +36,7 @@ for NAME in ${NAMES[@]}; do
                     SIZE=$(($SIZE * 2))
             done
             NTHREADS=$(($NTHREADS * 2))
+            SIZE=$INITIAL_SIZE
         done
     fi
     SIZE=$INITIAL_SIZE
