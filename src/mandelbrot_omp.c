@@ -116,37 +116,29 @@ void write_to_file(){
 };
 
 void compute_mandelbrot(){
-    double z_x;
-    double z_y;
-    double z_x_squared;
-    double z_y_squared;
     double escape_radius_squared = 4;
 
-    int iteration;
-    int i_x;
-
-    double c_x;
-    double c_y;
-#pragma omp parallel private(c_y, c_x, i_x, z_x, z_y, z_x_squared, z_y_squared, iteration)
+#pragma omp parallel  
     {
        int i_y;
-        #pragma omp for 
+        #pragma omp for schedule(dynamic) 
             for(i_y = 0; i_y < i_y_max; i_y++){
-                c_y = c_y_min + i_y * pixel_height;
+                double c_y = c_y_min + i_y * pixel_height;
 
                 if (fabs(c_y) < pixel_height / 2){
                     c_y = 0.0;
                 };
-
+                int i_x;
                 for(i_x = 0; i_x < i_x_max; i_x++){
-                    c_x         = c_x_min + i_x * pixel_width;
+                    double c_x         = c_x_min + i_x * pixel_width;
 
-                    z_x         = 0.0;
-                    z_y         = 0.0;
+                    double z_x         = 0.0;
+                    double z_y         = 0.0;
 
-                    z_x_squared = 0.0;
-                    z_y_squared = 0.0;
+                    double z_x_squared = 0.0;
+                    double z_y_squared = 0.0;
 
+                    int iteration;
                     for(iteration = 0;
                         iteration < iteration_max && \
                         ((z_x_squared + z_y_squared) < escape_radius_squared);
@@ -158,7 +150,7 @@ void compute_mandelbrot(){
                         z_y_squared = z_y * z_y;
                     };
 
-                    //update_rgb_buffer(iteration, i_x, i_y);
+                    update_rgb_buffer(iteration, i_x, i_y);
                 };
             };
     };
@@ -168,11 +160,11 @@ void compute_mandelbrot(){
 int main(int argc, char *argv[]){
     init(argc, argv);
 
-    //allocate_image_buffer();
+    allocate_image_buffer();
 
     compute_mandelbrot();
 
-    //write_to_file();
+    write_to_file();
 
     return 0;
 };
