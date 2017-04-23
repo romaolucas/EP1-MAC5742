@@ -7,8 +7,6 @@ double c_x_max;
 double c_y_min;
 double c_y_max;
 
-//just testing
-
 double pixel_width;
 double pixel_height;
 
