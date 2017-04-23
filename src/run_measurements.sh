@@ -28,6 +28,7 @@ for NAME in ${NAMES[@]}; do
         done
     elif [ "$NAME" == "mandelbrot_omp" ]; then
         while [ $NTHREADS -le 32 ]; do
+            export OMP_NUM_THREADS=$NTHREADS
             for ((i=1; i<=$ITERATIONS; i++)); do
                     perf stat -r $MEASUREMENTS ./$NAME -2.5 1.5 -2.0 2.0 $SIZE >> full_$NTHREADS.log 2>&1
                     perf stat -r $MEASUREMENTS ./$NAME -0.8 -0.7 0.05 0.15 $SIZE >> seahorse_$NTHREADS.log 2>&1
