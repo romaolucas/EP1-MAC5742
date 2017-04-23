@@ -4,6 +4,7 @@
 mandelbrot_seq
 mandelbrot_pth
 mandelbrot_omp
+*.DS_Store
 
 measurements/
 
