@@ -2,7 +2,7 @@ OUTPUT=mandelbrot
 
 IMAGE=.ppm
 
-CC=gcc
+CC=g++-6
 CC_OPT=-std=c11
 
 CC_OMP=-fopenmp
