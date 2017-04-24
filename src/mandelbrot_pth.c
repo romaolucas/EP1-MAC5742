@@ -43,6 +43,9 @@ int colors[17][3] = {
                         {0, 0, 0},
                     };
 
+
+pthread_mutex_t buffer_mutex;
+
 void allocate_image_buffer(){
     int rgb_size = 3;
     image_buffer = (unsigned char **) malloc(sizeof(unsigned char *) * image_buffer_size);
@@ -150,8 +153,9 @@ void * process_mandelbrot(void * t){
                 z_x_squared = z_x * z_x;
                 z_y_squared = z_y * z_y;
             };
-
+            pthread_mutex_lock(&buffer_mutex);
             update_rgb_buffer(iteration, i_x, i_y);
+            pthread_mutex_unlock(&buffer_mutex);
         };
     };
 };
@@ -160,11 +164,12 @@ void compute_mandelbrot(){
     pthread_t threads[MAX_THREADS];
     int error_code, t;
     long i_y = 0;
-
+    pthread_mutex_init(&buffer_mutex, NULL);
     for (t = 0;t < MAX_THREADS; t++){
         error_code = pthread_create(&threads[t], NULL, process_mandelbrot, (void *) i_y);
         i_y++;
     };
+    pthread_mutex_destroy(&buffer_mutex);
 };
 
 int main(int argc, char *argv[]){
