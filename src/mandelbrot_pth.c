@@ -116,42 +116,44 @@ void write_to_file(){
     fclose(file);
 };
 
-void * process_mandelbrot(void * i_y){
+void * process_mandelbrot(void * t){
+    int i_y;
+    int step = i_y_max / MAX_THREADS;
+    int min = (long) t * step;
+    int max = min + step;
     double escape_radius_squared = 4;
-    double c_y = c_y_min + (long) i_y * pixel_height;
-    int y;
+    for (i_y = min;i_y < max ;i_y ++) {
+        double c_y = c_y_min + i_y * pixel_height;
 
-        for (y = 0;y < i_y_max ;y += (i_y_max / MAX_THREADS)){
-
-            if (fabs(c_y) < pixel_height / 2){
-                c_y = 0.0;
-            };
-
-            int i_x;
-            for(i_x = 0; i_x < i_x_max; i_x++){
-                double c_x         = c_x_min + i_x * pixel_width;
-
-                double z_x         = 0.0;
-                double z_y         = 0.0;
-
-                double z_x_squared = 0.0;
-                double z_y_squared = 0.0;
-
-                int iteration;
-                for(iteration = 0;
-                    iteration < iteration_max && \
-                    ((z_x_squared + z_y_squared) < escape_radius_squared);
-                    iteration++){
-                    z_y         = 2 * z_x * z_y + c_y;
-                    z_x         = z_x_squared - z_y_squared + c_x;
-
-                    z_x_squared = z_x * z_x;
-                    z_y_squared = z_y * z_y;
-                };
-
-                update_rgb_buffer(iteration, i_x, (long) i_y);
-            };
+        if (fabs(c_y) < pixel_height / 2){
+            c_y = 0.0;
         };
+
+        int i_x;
+        for(i_x = 0; i_x < i_x_max; i_x++){
+            double c_x         = c_x_min + i_x * pixel_width;
+
+            double z_x         = 0.0;
+            double z_y         = 0.0;
+
+            double z_x_squared = 0.0;
+            double z_y_squared = 0.0;
+
+            int iteration;
+            for(iteration = 0;
+                iteration < iteration_max && \
+                ((z_x_squared + z_y_squared) < escape_radius_squared);
+                iteration++){
+                z_y         = 2 * z_x * z_y + c_y;
+                z_x         = z_x_squared - z_y_squared + c_x;
+
+                z_x_squared = z_x * z_x;
+                z_y_squared = z_y * z_y;
+            };
+
+            update_rgb_buffer(iteration, i_x, i_y);
+        };
+    };
 };
 
 void compute_mandelbrot(){
