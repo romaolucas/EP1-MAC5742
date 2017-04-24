@@ -119,6 +119,9 @@ void write_to_file(){
 void * process_mandelbrot(void * i_y){
     double escape_radius_squared = 4;
     double c_y = c_y_min + (long) i_y * pixel_height;
+    int y;
+
+        for (y = 0;y < i_y_max ;y += (i_y_max / MAX_THREADS)){
 
             if (fabs(c_y) < pixel_height / 2){
                 c_y = 0.0;
@@ -148,7 +151,8 @@ void * process_mandelbrot(void * i_y){
 
                 update_rgb_buffer(iteration, i_x, (long) i_y);
             };
-}
+        };
+};
 
 void compute_mandelbrot(){
     pthread_t threads[MAX_THREADS];
