@@ -13,7 +13,13 @@ double c_y_max;
 double pixel_width;
 double pixel_height;
 
+//data related to iterations inside each thread
+
 int iteration_max = 200;
+int step;
+
+
+int nthreads;
 
 int image_size;
 unsigned char **image_buffer;
@@ -54,13 +60,13 @@ void allocate_image_buffer(){
 };
 
 void init(int argc, char *argv[]){
-    if(argc < 6){
-        printf("usage: ./mandelbrot_pth c_x_min c_x_max c_y_min c_y_max image_size\n");
-        printf("examples with image_size = 11500:\n");
-        printf("    Full Picture:         ./mandelbrot_pth -2.5 1.5 -2.0 2.0 11500\n");
-        printf("    Seahorse Valley:      ./mandelbrot_pth -0.8 -0.7 0.05 0.15 11500\n");
-        printf("    Elephant Valley:      ./mandelbrot_pth 0.175 0.375 -0.1 0.1 11500\n");
-        printf("    Triple Spiral Valley: ./mandelbrot_pth -0.188 -0.012 0.554 0.754 11500\n");
+    if(argc < 7){
+        printf("usage: ./mandelbrot_pth c_x_min c_x_max c_y_min c_y_max num_threads image_size\n");
+        printf("examples with 4 threads image_size = 11500:\n");
+        printf("    Full Picture:         ./mandelbrot_pth -2.5 1.5 -2.0 2.0 4 11500\n");
+        printf("    Seahorse Valley:      ./mandelbrot_pth -0.8 -0.7 0.05 0.15 4 11500\n");
+        printf("    Elephant Valley:      ./mandelbrot_pth 0.175 0.375 -0.1 0.1 4 11500\n");
+        printf("    Triple Spiral Valley: ./mandelbrot_pth -0.188 -0.012 0.554 0.754 4 11500\n");
         exit(0);
     }
     else {
@@ -68,7 +74,8 @@ void init(int argc, char *argv[]){
         sscanf(argv[2], "%lf", &c_x_max);
         sscanf(argv[3], "%lf", &c_y_min);
         sscanf(argv[4], "%lf", &c_y_max);
-        sscanf(argv[5], "%d", &image_size);
+        sscanf(argv[5], "%d", &nthreads);
+        sscanf(argv[6], "%d", &image_size);
 
         i_x_max           = image_size;
         i_y_max           = image_size;
@@ -119,9 +126,11 @@ void write_to_file(){
 
 void * process_mandelbrot(void * t){
     int i_y;
-    int step = i_y_max / MAX_THREADS;
     int min = (long) t * step;
     int max = min + step;
+    if ( (long) t == nthreads - 1) {
+        max += i_y_max % nthreads;
+    }
     double escape_radius_squared = 4;
     for (i_y = min;i_y < max ;i_y ++) {
         double c_y = c_y_min + i_y * pixel_height;
@@ -157,15 +166,17 @@ void * process_mandelbrot(void * t){
 };
 
 void compute_mandelbrot(){
-    pthread_t threads[MAX_THREADS];
+    pthread_t *threads;
     int error_code, t;
     long i_y = 0;
-    for (t = 0;t < MAX_THREADS; t++){
+    threads = malloc(sizeof(pthread_t)*nthreads);
+    step = i_y_max / nthreads;
+    for (t = 0;t < nthreads; t++){
         error_code = pthread_create(&threads[t], NULL, process_mandelbrot, (void *) i_y);
         i_y++;
     };
 
-    for (t = 0; t < MAX_THREADS; t++) {
+    for (t = 0; t < nthreads; t++) {
         pthread_join(threads[t], NULL);
     };
 };
