@@ -160,7 +160,7 @@ void * process_mandelbrot(void * t){
                 z_x_squared = z_x * z_x;
                 z_y_squared = z_y * z_y;
             };
-            update_rgb_buffer(iteration, i_x, i_y);
+            //update_rgb_buffer(iteration, i_x, i_y);
         };
     };
 };
@@ -184,11 +184,11 @@ void compute_mandelbrot(){
 int main(int argc, char *argv[]){
     init(argc, argv);
 
-    allocate_image_buffer();
+    //allocate_image_buffer();
 
     compute_mandelbrot();
 
-    write_to_file();
+    //write_to_file();
 
     return 0;
 };
