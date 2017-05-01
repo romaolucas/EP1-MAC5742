@@ -6,7 +6,8 @@ from parse import *
 
 data = {}
 
-list_of_files = glob.glob('mandelbrot_omp/*.log')
+list_of_files = glob.glob('mandelbrot_seq/*.log')
+file_times = {}
 for file_name in list_of_files:
     FI = open(file_name, 'r')
     data_list = []
@@ -20,27 +21,14 @@ for file_name in list_of_files:
         if r:
             data['time'] = float(r['time'])
             data_list.append(data.copy())
+    file_times[file_name] = [d['time'] for  d in data_list]   
     FI.close()
 
-data_list = []
-FI = open("mandelbrot_seq/full.log")
-for line in FI:
-    data = {}
-    r = search('{clock}      task-clock (msec)         #    {cpu} CPUs utilized', line)
-    if r:
-        data['clock'] = float(r['clock']) 
-        data['cpu'] = float(r['cpu'])
-    r = search('{time} seconds time elapsed', line)
-    if r:
-        data['time'] = float(r['time'])
-        data_list.append(data.copy())
-y = [d['time'] for d in data_list]
 x = [2**i for i in range(4, 14)] 
+for file_name in file_times:
+    plt.plot(x, file_times[file_name], label=file_name)
 
-plt.xlim(16, 8192)
-plt.ylim(min(y), max(y))
-plt.autoscale(False)
-plt.plot(x, y)
-plt.show()
-
-#FO.close()
+plt.legend()
+plt.xlabel('Tamanho da Entrada')
+plt.ylabel('Tempo de execução')
+plt.savefig('seq.png')
