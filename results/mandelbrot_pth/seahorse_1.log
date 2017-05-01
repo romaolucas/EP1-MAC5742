@@ -1,0 +1,160 @@
+
+ Performance counter stats for './mandelbrot_pth -0.8 -0.7 0.05 0.15 1 16' (10 runs):
+
+          0.751047      task-clock (msec)         #    0.717 CPUs utilized            ( +-  0.53% )
+                 1      context-switches          #    0.001 M/sec                  
+                 1      cpu-migrations            #    0.001 M/sec                  
+                57      page-faults               #    0.075 M/sec                    ( +-  0.59% )
+   <not supported>      cycles                   
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+   <not supported>      instructions             
+   <not supported>      branches                 
+   <not supported>      branch-misses            
+
+       0.001047298 seconds time elapsed                                          ( +-  0.83% )
+
+
+ Performance counter stats for './mandelbrot_pth -0.8 -0.7 0.05 0.15 1 32' (10 runs):
+
+          1.817103      task-clock (msec)         #    0.859 CPUs utilized            ( +-  0.22% )
+                 1      context-switches          #    0.550 K/sec                  
+                 1      cpu-migrations            #    0.550 K/sec                  
+                57      page-faults               #    0.031 M/sec                    ( +-  0.65% )
+   <not supported>      cycles                   
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+   <not supported>      instructions             
+   <not supported>      branches                 
+   <not supported>      branch-misses            
+
+       0.002116546 seconds time elapsed                                          ( +-  0.43% )
+
+
+ Performance counter stats for './mandelbrot_pth -0.8 -0.7 0.05 0.15 1 64' (10 runs):
+
+          6.158646      task-clock (msec)         #    0.947 CPUs utilized            ( +-  0.13% )
+                 1      context-switches          #    0.162 K/sec                  
+                 1      cpu-migrations            #    0.179 K/sec                    ( +-  9.09% )
+                56      page-faults               #    0.009 M/sec                    ( +-  0.47% )
+   <not supported>      cycles                   
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+   <not supported>      instructions             
+   <not supported>      branches                 
+   <not supported>      branch-misses            
+
+       0.006504549 seconds time elapsed                                          ( +-  0.18% )
+
+
+ Performance counter stats for './mandelbrot_pth -0.8 -0.7 0.05 0.15 1 128' (10 runs):
+
+         23.381480      task-clock (msec)         #    0.983 CPUs utilized            ( +-  0.11% )
+                 1      context-switches          #    0.043 K/sec                  
+                 1      cpu-migrations            #    0.047 K/sec                    ( +-  9.09% )
+                57      page-faults               #    0.002 M/sec                    ( +-  0.44% )
+   <not supported>      cycles                   
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+   <not supported>      instructions             
+   <not supported>      branches                 
+   <not supported>      branch-misses            
+
+       0.023774337 seconds time elapsed                                          ( +-  0.10% )
+
+
+ Performance counter stats for './mandelbrot_pth -0.8 -0.7 0.05 0.15 1 256' (10 runs):
+
+         91.681714      task-clock (msec)         #    0.995 CPUs utilized            ( +-  0.04% )
+                 1      context-switches          #    0.015 K/sec                    ( +- 11.66% )
+                 1      cpu-migrations            #    0.011 K/sec                  
+                57      page-faults               #    0.617 K/sec                    ( +-  0.60% )
+   <not supported>      cycles                   
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+   <not supported>      instructions             
+   <not supported>      branches                 
+   <not supported>      branch-misses            
+
+       0.092112760 seconds time elapsed                                          ( +-  0.05% )
+
+
+ Performance counter stats for './mandelbrot_pth -0.8 -0.7 0.05 0.15 1 512' (10 runs):
+
+        365.625283      task-clock (msec)         #    0.999 CPUs utilized            ( +-  0.13% )
+                 2      context-switches          #    0.007 K/sec                    ( +- 14.91% )
+                 1      cpu-migrations            #    0.003 K/sec                  
+                57      page-faults               #    0.155 K/sec                    ( +-  0.70% )
+   <not supported>      cycles                   
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+   <not supported>      instructions             
+   <not supported>      branches                 
+   <not supported>      branch-misses            
+
+       0.366041565 seconds time elapsed                                          ( +-  0.13% )
+
+
+ Performance counter stats for './mandelbrot_pth -0.8 -0.7 0.05 0.15 1 1024' (10 runs):
+
+       1454.754155      task-clock (msec)         #    1.000 CPUs utilized            ( +-  0.02% )
+                 6      context-switches          #    0.004 K/sec                    ( +-  5.79% )
+                 1      cpu-migrations            #    0.001 K/sec                  
+                57      page-faults               #    0.039 K/sec                    ( +-  0.69% )
+   <not supported>      cycles                   
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+   <not supported>      instructions             
+   <not supported>      branches                 
+   <not supported>      branch-misses            
+
+       1.455248396 seconds time elapsed                                          ( +-  0.02% )
+
+
+ Performance counter stats for './mandelbrot_pth -0.8 -0.7 0.05 0.15 1 2048' (10 runs):
+
+       5819.731006      task-clock (msec)         #    1.000 CPUs utilized            ( +-  0.02% )
+                18      context-switches          #    0.003 K/sec                    ( +-  1.12% )
+                 1      cpu-migrations            #    0.000 K/sec                  
+                56      page-faults               #    0.010 K/sec                    ( +-  0.76% )
+   <not supported>      cycles                   
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+   <not supported>      instructions             
+   <not supported>      branches                 
+   <not supported>      branch-misses            
+
+       5.820377976 seconds time elapsed                                          ( +-  0.02% )
+
+
+ Performance counter stats for './mandelbrot_pth -0.8 -0.7 0.05 0.15 1 4096' (10 runs):
+
+      23333.860762      task-clock (msec)         #    1.000 CPUs utilized            ( +-  0.03% )
+                66      context-switches          #    0.003 K/sec                    ( +-  0.66% )
+                 1      cpu-migrations            #    0.000 K/sec                    ( +-  9.09% )
+                57      page-faults               #    0.002 K/sec                    ( +-  0.65% )
+   <not supported>      cycles                   
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+   <not supported>      instructions             
+   <not supported>      branches                 
+   <not supported>      branch-misses            
+
+      23.335117292 seconds time elapsed                                          ( +-  0.03% )
+
+
+ Performance counter stats for './mandelbrot_pth -0.8 -0.7 0.05 0.15 1 8192' (10 runs):
+
+      93416.043116      task-clock (msec)         #    1.000 CPUs utilized            ( +-  0.07% )
+               258      context-switches          #    0.003 K/sec                    ( +-  0.23% )
+                 1      cpu-migrations            #    0.000 K/sec                  
+                57      page-faults               #    0.001 K/sec                    ( +-  0.48% )
+   <not supported>      cycles                   
+   <not supported>      stalled-cycles-frontend  
+   <not supported>      stalled-cycles-backend   
+   <not supported>      instructions             
+   <not supported>      branches                 
+   <not supported>      branch-misses            
+
+      93.419695937 seconds time elapsed                                          ( +-  0.07% )
+
