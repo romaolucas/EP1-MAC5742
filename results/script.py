@@ -7,6 +7,7 @@ data_list = []
 list_of_files = glob.glob('mandelbrot_omp/*.log')
 for file_name in list_of_files:
 	FI = open(file_name, 'r')
+	print file_name
 	#FO = open(file_name.replace('log', 'out'), 'w') 
 	for line in FI:
 		r = search('{clock}      task-clock (msec)         #    {cpu} CPUs utilized', line)
@@ -16,7 +17,9 @@ for file_name in list_of_files:
 		r = search('{time} seconds time elapsed', line)
 		if r:
 			data['time'] = float(r['time'])
-			data_list.append(data)
+			data_list.append(data.copy())
+
+print data_list
 
 FI.close()
 #FO.close()
