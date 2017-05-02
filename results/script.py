@@ -12,7 +12,7 @@ file_times = {}
 for file_name in list_of_files:
     FI = open(file_name, 'r')
     data_list = []
-    #FO = open(file_name.replace('log', 'out'), 'w') 
+    FO = open(file_name.replace('log', 'out'), 'w') 
     for line in FI:
         r = search('{clock}      task-clock (msec)         #    {cpu} CPUs utilized', line)
         if r:
@@ -24,10 +24,11 @@ for file_name in list_of_files:
             data_list.append(data.copy())
     file_times[file_name] = [d['time'] for  d in data_list]
     import numpy as np
-    print("Media dos tempos de {} : {}".format(file_name, np.mean(file_times[file_name])))
-    print("Desvio padrao de {} : {}".format(file_name, np.std(file_times[file_name])))
+    FO.write("Media dos tempos de {} : {}\n".format(file_name, np.mean(file_times[file_name])))
+    FO.write("Desvio padrao de {} : {}".format(file_name, np.std(file_times[file_name])))
     FI.close()
-
+    FO.close()
+    
 x = [2**i for i in range(4, 14)] 
 for file_name in file_times:
     plt.plot(x, file_times[file_name], label=(file_name.split('/')[1]).split('.')[0])
