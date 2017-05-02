@@ -39,6 +39,7 @@ for file_name in file_times:
     plt.plot(x, file_times[file_name], label=(file_name.split('/')[1]).split('.')[0])
 
 plt.legend()
+plt.title('Sequencial')
 plt.xlabel('Tamanho da Entrada')
 plt.ylabel('Tempo de Execucao (s)')
 plt.savefig('seq.png')
@@ -67,7 +68,7 @@ for folder in folders:
         handles, labels = ax.get_legend_handles_labels()
         labels, handles = zip(*sorted(zip(labels, handles), key=lambda t: int(t[0])))
         plt.legend(handles, labels, title='Numero de Threads')
-        plt.title(image)
+        plt.title(image.title())
         plt.xlabel('Tamanho da Entrada')
         plt.ylabel('Tempo de Execucao (s)')
         plt.savefig(folder + '_' + image + '.png')
