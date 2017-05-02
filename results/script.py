@@ -1,3 +1,4 @@
+# encoding=utf8  
 import glob
 import numpy as np
 import matplotlib.pyplot as plt
@@ -29,9 +30,9 @@ for file_name in list_of_files:
 
 x = [2**i for i in range(4, 14)] 
 for file_name in file_times:
-    plt.plot(x, file_times[file_name], label=file_name)
+    plt.plot(x, file_times[file_name], label=(file_name.split('/')[1]).split('.')[0])
 
 plt.legend()
 plt.xlabel('Tamanho da Entrada')
-plt.ylabel('Tempo de execução')
+plt.ylabel('Tempo de Execucao (s)')
 plt.savefig('seq.png')
