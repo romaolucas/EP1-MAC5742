@@ -38,7 +38,9 @@ x = [2**i for i in range(4, 14)]
 for file_name in file_times:
     plt.plot(x, file_times[file_name], label=(file_name.split('/')[1]).split('.')[0])
 
-plt.legend()
+axes = plt.gca()
+axes.set_ylim([0,150])
+plt.legend(loc="upper left")
 plt.title('Sequencial')
 plt.xlabel('Tamanho da Entrada')
 plt.ylabel('Tempo de Execucao (s)')
@@ -64,10 +66,11 @@ for folder in folders:
         for file_name in file_times:
             plt.plot(x, file_times[file_name], label=((file_name.split('/')[1]).split('.')[0]).split('_')[-1])
 
-        ax=gca()
-        handles, labels = ax.get_legend_handles_labels()
+        axes = plt.gca()
+        handles, labels = axes.get_legend_handles_labels()
         labels, handles = zip(*sorted(zip(labels, handles), key=lambda t: int(t[0])))
-        plt.legend(handles, labels, title='Numero de Threads')
+        axes.set_ylim([0,150])
+        plt.legend(handles, labels, title='Numero de Threads', loc="upper left")
         plt.title(image.title())
         plt.xlabel('Tamanho da Entrada')
         plt.ylabel('Tempo de Execucao (s)')
