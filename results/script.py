@@ -21,7 +21,10 @@ for file_name in list_of_files:
         if r:
             data['time'] = float(r['time'])
             data_list.append(data.copy())
-    file_times[file_name] = [d['time'] for  d in data_list]   
+    file_times[file_name] = [d['time'] for  d in data_list]
+    import numpy as np
+    print("Media dos tempos de {} : {}".format(file_name, np.mean(file_times[file_name])))
+    print("Desvio padrao de {} : {}".format(file_name, np.std(file_times[file_name])))
     FI.close()
 
 x = [2**i for i in range(4, 14)] 
