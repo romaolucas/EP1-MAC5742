@@ -6,6 +6,7 @@ ITERATIONS=10
 INITIAL_SIZE=16
 
 NAME='mandelbrot_seq_wo_alloc'
+SIZE=$INITIAL_SIZE
 
 mkdir results/$NAME
 for ((i=1; i<=$ITERATIONS; i++)); do
